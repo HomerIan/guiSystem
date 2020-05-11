@@ -13,6 +13,12 @@ import javax.swing.*;
 import java.awt.CardLayout;
 import java.awt.Container;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Font;
+
 public class UI extends JFrame {
 
 	private static int matrixSize;
@@ -44,7 +50,6 @@ public class UI extends JFrame {
 	private JTable tableInput;
 	private JScrollPane scrollPane;
 	private JButton btnHome;
-	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -81,11 +86,13 @@ public class UI extends JFrame {
 		layeredPane.setLayout(new CardLayout(0, 0));
 
 		panel1 = new JPanel();
+		panel1.setBackground(new Color(255, 204, 153));
 		layeredPane.add(panel1, "name_153593036284900");
 		panel1.setLayout(null);
 
 		lblMatrixSize = new JLabel("MATRIX SIZE");
-		lblMatrixSize.setBounds(85, 118, 93, 14);
+		lblMatrixSize.setFont(new Font("Goudy Old Style", Font.PLAIN, 13));
+		lblMatrixSize.setBounds(105, 118, 93, 14);
 		panel1.add(lblMatrixSize);
 
 		MatrixSizetextField = new JTextField();
@@ -116,16 +123,19 @@ public class UI extends JFrame {
 		MatrixSizetextField.setBounds(188, 115, 96, 20);
 		panel1.add(MatrixSizetextField);
 		MatrixSizetextField.setColumns(10);
-		
+
 		JLabel lblFloydwarshallAlgorithm = new JLabel("FLOYD-WARSHALL ALGORITHM");
-		lblFloydwarshallAlgorithm.setBounds(117, 41, 180, 32);
+		lblFloydwarshallAlgorithm.setFont(new Font("Papyrus", Font.BOLD, 13));
+		lblFloydwarshallAlgorithm.setBounds(72, 41, 307, 32);
 		panel1.add(lblFloydwarshallAlgorithm);
 
 		panel2 = new JPanel();
+		panel2.setBackground(new Color(255, 204, 153));
 		layeredPane.add(panel2, "name_153593069475500");
 		panel2.setLayout(null);
 
 		btnShowMatrix = new JButton("SHOW MATRIX");
+		btnShowMatrix.setFont(new Font("Papyrus", Font.BOLD, 14));
 		btnShowMatrix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -136,6 +146,7 @@ public class UI extends JFrame {
 		panel2.add(btnShowMatrix);
 
 		btnFloydWarshall = new JButton("START MST");
+		btnFloydWarshall.setFont(new Font("Papyrus", Font.BOLD, 14));
 		btnFloydWarshall.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanels(panel3);
@@ -146,6 +157,7 @@ public class UI extends JFrame {
 		panel2.add(btnFloydWarshall);
 
 		panel3 = new JPanel();
+		panel3.setBackground(new Color(255, 204, 153));
 		layeredPane.add(panel3, "name_154577204251200");
 		panel3.setLayout(null);
 
@@ -157,6 +169,7 @@ public class UI extends JFrame {
 		scrollPane.setViewportView(tableInput);
 
 		btnNext = new JButton("NEXT");
+		btnNext.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -181,6 +194,7 @@ public class UI extends JFrame {
 		panel3.add(btnNext);
 
 		btnBack = new JButton("BACK");
+		btnBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -200,20 +214,24 @@ public class UI extends JFrame {
 		panel3.add(btnBack);
 
 		lbliteration = new JLabel("Number of Iterations");
-		lbliteration.setBounds(302, 138, 112, 46);
+		lbliteration.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		lbliteration.setBounds(302, 88, 113, 51);
 		panel3.add(lbliteration);
 
 		lbliterationCount = new JLabel("");
-		lbliterationCount.setBounds(339, 200, 48, 40);
+		lbliterationCount.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
+		lbliterationCount.setBounds(354, 126, 48, 40);
 		lbliterationCount.setText("" + Integer.toString(iterateCount));
 		panel3.add(lbliterationCount);
 
 		lblpageCount = new JLabel("New label");
+		lblpageCount.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblpageCount.setBounds(112, 200, 89, 40);
 		lblpageCount.setText("Iteration: " + page + " / " + (iterateCount));
 		panel3.add(lblpageCount);
-		
+
 		btnHome = new JButton("HOME");
+		btnHome.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanels(panel1);
@@ -226,7 +244,6 @@ public class UI extends JFrame {
 
 	protected void showMatrix(int[][] matrix, String title) {
 
-		
 		JPanel choosePanel[] = new JPanel[matrix.length + 1];
 		choosePanel[0] = new JPanel();
 		choosePanel[0].add(new JLabel(title));
@@ -235,13 +252,12 @@ public class UI extends JFrame {
 			choosePanel[i] = new JPanel();
 
 			for (int j = 0; j < matrix[0].length; j++) {
-				if(matrix[i-1][j]==99999) {
+				if (matrix[i - 1][j] == 99999) {
 					choosePanel[i].add(new JLabel("INF"));
-				}else {
+				} else {
 					choosePanel[i].add(new JLabel(Integer.toString(matrix[i - 1][j])));
 
 				}
-
 
 				if (j < matrix[0].length - 1) {
 					choosePanel[i].add(Box.createHorizontalStrut(15)); // a spacer
